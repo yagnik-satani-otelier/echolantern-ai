@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#211d2b">
+  <meta name="description" content="Keep the stories that make us. A private, local-first memory keepsake maker powered by open-weight AI.">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="stylesheet" href="/styles.css">
+  <title>EchoLantern · A little light for what we keep</title>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#create" aria-label="EchoLantern home">
+        <span class="brand-mark"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 5c-7 7-8 12-5 18-5 3-7 8-4 14 3 5 12 5 17 1 7-6 4-14-1-17 1-5-1-10-7-16Z" fill="currentColor"/><path d="M24 15c-3 5-4 9-1 13-4 4-3 9 2 11 3-4 4-7 2-11 3-4 2-8-3-13Z" fill="#f3bc63"/></svg></span>
+        <span><strong>EchoLantern</strong><small>A LITTLE LIGHT FOR WHAT WE KEEP</small></span>
+      </a>
+      <div class="sidebar-intro"><span class="tiny-spark">✳</span><strong>Keep what matters.</strong><p>Small stories deserve somewhere to live.</p></div>
+      <div class="nav-label">YOUR LANTERN</div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="create"><span class="nav-icon">✧</span><span>Make a keepsake</span></button>
+        <button class="nav-item" data-view="archive"><span class="nav-icon">▤</span><span>Memory archive</span><span class="nav-count" id="archiveCount">0</span></button>
+        <button class="nav-item" id="exportAll"><span class="nav-icon">⇩</span><span>Export my lantern</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="privacy-card"><span class="privacy-dot"></span><div><strong>Private by design</strong><p>Your keepsakes stay in this browser. Local AI is optional.</p></div></div>
+        <div class="model-status"><span class="status-led" id="statusLed"></span><div><strong id="modelStatus">Checking local AI…</strong><small id="modelDetail">Ollama · Gemma 3 1B</small></div></div>
+        <p class="side-foot">A gentle tool for remembering, not a voice from beyond.</p>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar"><div class="breadcrumbs"><span>Workspace</span><b>/</b><strong id="breadcrumbCurrent">Create a keepsake</strong></div><div class="topbar-actions"><span class="local-pill"><span class="pill-dot"></span> LOCAL-FIRST</span><button class="icon-button" id="aboutButton" aria-label="About EchoLantern" title="About">i</button></div></header>
+
+      <section class="view active" id="createView">
+        <section class="hero">
+          <div class="hero-copy">
+            <div class="eyebrow"><span>✳</span> THE DETAILS WE CHOOSE TO KEEP</div>
+            <h1>Some things<br>deserve <em>another light.</em></h1>
+            <p class="hero-lede">Gather a memory, a small ritual, a favorite saying, or a story that shouldn't disappear into the scroll.</p>
+            <div class="hero-actions"><button class="primary-button" id="startButton">+ Make a keepsake <span>↗</span></button><span class="hero-note">Your words. Your archive. Your pace.</span></div>
+          </div>
+          <div class="hero-art" aria-label="Illustration of a glowing lantern and handwritten memory cards">
+            <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+            <span class="art-star star-one">✳</span><span class="art-star star-two">✧</span><span class="art-star star-three">·</span>
+            <div class="moon-glow"></div>
+            <div class="paper-card"><span class="paper-kicker">A NOTE TO KEEP</span><strong>Ordinary days<br>become the stories.</strong><span class="paper-line"></span><small>✦ saved with care</small></div>
+            <div class="lantern"><div class="lantern-loop"></div><div class="lantern-roof"></div><div class="lantern-glass"><span>✦</span><i></i></div><div class="lantern-base"></div><div class="lantern-foot"></div></div>
+            <div class="flower flower-one">✿</div><div class="flower flower-two">✾</div>
+            <div class="art-caption">A MEMORY IS A SMALL LIGHT.</div>
+          </div>
+        </section>
+
+        <section class="stats-row">
+          <div class="stat-card"><span class="stat-label">KEEPSAKES SAVED</span><strong id="savedCount">0</strong><small>Nothing forgotten on purpose.</small></div>
+          <div class="stat-card"><span class="stat-label">YOUR WRITING PARTNER</span><strong id="engineCard">Template mode</strong><small id="engineSub">A simple fallback is ready.</small></div>
+          <div class="stat-card"><span class="stat-label">THE PROMISE</span><strong>Nothing leaves by default</strong><small>Local browser storage. Local AI when available.</small></div>
+        </section>
+
+        <div class="workbench" id="workbench">
+          <section class="form-panel panel">
+            <div class="panel-heading"><span class="step-chip">01</span><div><h2>Gather the little pieces</h2><p>A few honest details are enough. No perfect story needed.</p></div></div>
+            <form id="memoryForm">
+              <div class="field-grid">
+                <label class="field"><span>What should we call this?</span><input name="title" maxlength="100" placeholder="e.g. Sunday mangoes on the balcony"></label>
+                <label class="field"><span>Who or what is it about? <small>optional</small></span><input name="subject" maxlength="100" placeholder="A person, pet, place, or tradition"></label>
+              </div>
+              <div class="field-grid field-grid-thirds">
+                <label class="field"><span>Kind of memory</span><select name="context"><option>everyday memory</option><option>person</option><option>place</option><option>pet</option><option>family story</option><option>object or tradition</option></select></label>
+                <label class="field"><span>Writing mood</span><select name="tone"><option value="gentle">Gentle & warm</option><option value="poetic">Poetic</option><option value="plainspoken">Simple & direct</option><option value="storybook">Storybook</option></select></label>
+                <label class="field"><span>Language</span><select name="language"><option>English</option><option>Gujarati</option><option>Hinglish</option></select></label>
+              </div>
+              <label class="field"><span>The memory <b class="required-star">*</b></span><small class="field-hint">What happened, what you remember, or the part you don't want to lose.</small><textarea name="memory" rows="5" maxlength="2200" required placeholder="I remember the sound of the old ceiling fan and how everyone gathered in the kitchen on rainy evenings…"></textarea><span class="field-footer"><small>Use your own words. Short notes are welcome.</small><small id="memoryCount">0 / 2200</small></span></label>
+              <div class="field-grid">
+                <label class="field"><span>Details to keep close <small>optional</small></span><textarea name="details" rows="3" maxlength="1000" placeholder="A song, favorite food, familiar phrase, smell, object…"></textarea></label>
+                <label class="field"><span>Why does it matter to you? <small>optional</small></span><textarea name="meaning" rows="3" maxlength="600" placeholder="What you want to remember about it"></textarea></label>
+              </div>
+              <div class="field-grid">
+                <label class="field"><span>Date or place <small>optional</small></span><input name="dateOrPlace" maxlength="160" placeholder="A winter evening, Nana's garden…"></label>
+                <label class="field photo-field"><span>Add one photo <small>optional · stays in this browser</small></span><input id="photoInput" type="file" accept="image/*"><span class="photo-help" id="photoHelp">Choose a photo to keep with this memory.</span></label>
+              </div>
+              <div class="photo-preview-wrap" id="photoPreviewWrap" hidden><img id="photoPreview" alt="Local preview of selected memory photo"><button type="button" class="text-button" id="removePhoto">Remove photo</button></div>
+              <div class="form-note"><span class="note-icon">♧</span><p><strong>A gentle boundary:</strong> EchoLantern helps you write about memories. It doesn't contact spirits, and it won't assume someone has passed away. Read the draft before saving it.</p></div>
+              <div class="form-actions"><button type="button" class="secondary-button" id="sampleButton">Try a sample</button><button type="submit" class="primary-button" id="generateButton">Light the lantern <span>✦</span></button></div>
+            </form>
+          </section>
+
+          <section class="result-panel panel" id="resultPanel" aria-live="polite">
+            <div class="panel-heading"><span class="step-chip lilac">02</span><div><h2>Your keepsake</h2><p>Drafted from your notes. Keep, edit, or start again.</p></div></div>
+            <div class="empty-result" id="emptyResult"><div class="empty-illustration"><div class="mini-flame">✦</div><div class="mini-lantern"></div></div><h3>A little light, waiting.</h3><p>When you're ready, share a memory on the left. Your keepsake will appear here.</p><div class="empty-rule"></div><small>Nothing is saved until you choose to save it.</small></div>
+            <div class="generated-result" id="generatedResult" hidden>
+              <div class="mode-notice template" id="modeNotice"><strong>TEMPLATE MODE</strong><span>Built-in keepsake template.</span></div>
+              <div class="keepsake-preview" id="keepsakePreview">
+                <div class="preview-top"><span class="preview-kicker">A PIECE TO KEEP</span><span class="preview-mark">✧</span></div>
+                <label class="output-field"><span>Title</span><input id="outputTitle" maxlength="140"></label>
+                <label class="output-field"><span>Keepsake note</span><textarea id="outputKeepsake" rows="4" maxlength="900"></textarea></label>
+                <label class="output-field"><span>Memory in a few lines</span><textarea id="outputStory" rows="5" maxlength="1500"></textarea></label>
+                <label class="output-field inscription-field"><span>Card inscription</span><textarea id="outputInscription" rows="2" maxlength="240"></textarea></label>
+                <label class="output-field"><span>A question for another day</span><textarea id="outputQuestion" rows="2" maxlength="280"></textarea></label>
+                <div class="preview-footer"><span>Made with care · not a transcript</span><span>✦</span></div>
+              </div>
+              <div class="source-anchors"><span class="source-icon">≋</span><p><strong>Your original words remain the source.</strong><br>Check the draft against the memory you supplied. AI can misread details.</p></div>
+              <div class="result-actions"><button class="primary-button" id="saveButton">Save to my lantern <span>↓</span></button><button class="secondary-button" id="copyButton">Copy text</button></div>
+              <button class="text-button full-width" id="downloadButton">Download this keepsake as Markdown ↗</button>
+            </div>
+          </section>
+        </div>
+        <footer class="page-footer"><span>✳</span> EchoLantern · Keep the story. Leave the shadows to the imagination.</footer>
+      </section>
+
+      <section class="view archive-view" id="archiveView" hidden>
+        <section class="archive-hero"><div class="eyebrow"><span>✳</span> YOUR STORIES, GATHERED</div><h1>The memory<br><em>lantern archive.</em></h1><p>Saved locally in this browser. Reopen a keepsake when you need a little reminder.</p><div class="archive-toolbar"><input id="archiveSearch" type="search" placeholder="Find a keepsake…" aria-label="Search keepsakes"><span id="archiveTotal">0 keepsakes</span></div></section>
+        <div class="archive-empty" id="archiveEmpty"><div class="empty-illustration"><div class="mini-flame">✦</div><div class="mini-lantern"></div></div><h3>Your lantern is waiting for its first story.</h3><p>Make a keepsake and save it here. You choose what to keep.</p><button class="primary-button" id="firstKeepsakeButton">Make your first keepsake ↗</button></div>
+        <div class="archive-grid" id="archiveGrid"></div>
+        <footer class="page-footer"><span>✳</span> Stored in your browser · Export a backup before clearing site data.</footer>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog id="aboutDialog" class="about-dialog"><button class="dialog-close" id="closeAbout" aria-label="Close">×</button><span class="modal-spark">✳</span><h2>A small light for what we keep.</h2><p>EchoLantern is a private memory-writing tool. It helps shape your own notes into a keepsake; it doesn't verify memories, speak for people, or contact spirits.</p><p><strong>Local AI:</strong> When running locally with Ollama, your prompt is sent to the Ollama service you configured. On the hosted preview, the app uses a clearly labelled browser template.</p><p>Your saved keepsakes and photos stay in this browser's local storage. They're not encrypted. Avoid entering passwords, secrets, or information you aren't comfortable storing here.</p><button class="primary-button" id="closeAboutButton">That's understood</button></dialog>
+  <script src="/fallback.js" defer></script>
+  <script src="/app.js" defer></script>
+</body>
+</html>
