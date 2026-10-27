@@ -14,7 +14,7 @@ The app intentionally does not pretend to speak for someone who is gone or conta
 
 ## Demo
 
-**Live demo:** Add the Vercel URL after deployment is verified.
+**Live demo:** https://echolantern-ai.vercel.app/
 
 The static deployment shows the interface and browser-based template fallback. It cannot access Ollama running on a user's computer, so it is not a live hosted Gemma demo. The local version runs the Node server alongside Ollama and can generate keepsakes with Gemma 3 1B.
 
