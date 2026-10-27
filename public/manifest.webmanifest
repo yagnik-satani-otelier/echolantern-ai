@@ -1,0 +1,10 @@
+{
+  "name": "EchoLantern",
+  "short_name": "EchoLantern",
+  "description": "A private little archive for stories, memories, and meaningful details.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f6f1e8",
+  "theme_color": "#2c2038",
+  "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}
