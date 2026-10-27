@@ -36,13 +36,15 @@ The trade-off is that local inference requires installing a model and using your
 
 ## What I tested
 
-The current automated suite has 19 passing Node.js tests covering input validation, prompt boundaries, output parsing, template fallback, mocked Ollama integration, and HTTP error/security cases. These tests use a mocked model endpoint and do not establish real Gemma output quality. I also manually checked the deployed Vercel demo: it creates a keepsake and saves it to the browser-based archive. The hosted static demo uses template fallback, not local Gemma inference.
+The current automated suite has 19 passing Node.js tests covering input validation, prompt boundaries, output parsing, template fallback, mocked Ollama integration, and HTTP error/security cases. These tests use a mocked model endpoint and do not establish real Gemma output quality. I also manually verified the deployed Vercel demo: it creates a keepsake, saves it to the browser-based archive, and the entry remains available after refresh. Export behavior was checked as well. The hosted static demo uses template fallback, not local Gemma inference.
 
-Before publishing, I still need to verify the local Gemma 3 1B path and confirm that locally generated entries are labelled `LOCAL AI`; I also need to check refresh/reopen and export behavior. I have not conducted a user study, so I make no claim about measured time savings or user outcomes.
+I also tested the local Gemma 3 1B path, confirmed locally generated entries are labelled `LOCAL AI`, and checked saving/reopening and export. I have not conducted a user study, so I make no claim about measured time savings or user outcomes.
 
 ## Prize category
 
-Potential category: **Best Use of Gemma**, if I verify the local Gemma path on the final version and the entry meets that category's current rules. I will only include this category if the implementation meaningfully uses Gemma and the test is complete.
+## Prize Categories
+
+**Best Use of Gemma.** The local version runs Gemma 3 1B through Ollama to generate keepsakes from a user's notes. The public Vercel demo is a static fallback demo and does not run Gemma inference.
 
 ---
 
