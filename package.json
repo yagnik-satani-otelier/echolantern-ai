@@ -1,0 +1,13 @@
+{
+  "name": "echolantern-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A private, local-first keepsake maker using Gemma through Ollama",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test",
+    "check": "node --check server.js && node --check lib/core.js && node --check public/app.js"
+  },
+  "engines": { "node": ">=18.18" },
+  "license": "MIT"
+}
